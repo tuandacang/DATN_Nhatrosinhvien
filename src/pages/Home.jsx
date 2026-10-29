@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import RoomCard from '../components/RoomCard.jsx'
 import { featuredRooms, radiusOptions, schools } from '../data/rooms.js'
 
+const heroFiles = import.meta.glob('../assets/hero.{jpg,jpeg,png,webp}', {
+  eager: true,
+  import: 'default',
+})
+const heroUrl = Object.values(heroFiles)[0]
+
 export default function Home() {
   const navigate = useNavigate()
   const [school, setSchool] = useState(schools[0])
@@ -16,7 +22,10 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero">
+      <section
+        className="hero"
+        style={heroUrl ? { '--hero-img': `url(${heroUrl})` } : undefined}
+      >
         <div className="hero__content">
           <span className="pill">Cộng đồng sinh viên Thủ đô</span>
           <h1 className="hero__title">Tìm phòng gần trường đại học</h1>

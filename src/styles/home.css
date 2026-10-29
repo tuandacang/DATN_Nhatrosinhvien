@@ -5,8 +5,12 @@
   justify-content: center;
   min-height: 640px;
   padding: 167px var(--gutter) 80px;
-  /* Thay bằng ảnh nền thật: background-image: url(...) + lớp phủ ấm */
-  background: linear-gradient(180deg, #f3dfc9 0%, #f8ebdd 55%, var(--bg) 100%);
+  background-color: #f3dfc9;
+  background-image:
+    linear-gradient(180deg, rgba(252, 249, 245, 0.9) 0%, rgba(252, 249, 245, 0.75) 50%, var(--bg) 100%),
+    var(--hero-img, linear-gradient(180deg, #f3dfc9, #f8ebdd));
+  background-size: cover;
+  background-position: center;
 }
 
 .hero__content {
