@@ -47,7 +47,7 @@ export default function Header() {
               <Link to="/thong-bao" className="icon-btn" aria-label="Thông báo">
                 <BellIcon />
               </Link>
-              <Link to="/ho-so" className="account">
+              <Link to={current === 'landlord' ? '/cai-dat' : '/ho-so'} className="account">
                 <span className="account__avatar">
                   {current === 'landlord' ? 'C' : 'S'}
                 </span>
