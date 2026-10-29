@@ -1,0 +1,30 @@
+/* Design tokens lấy từ Figma - Template 1 */
+:root {
+  --bg: #fcf9f5;
+  --ink: #1b1c1a;
+  --sub: #59413a;
+  --red: #ab2e05;
+  --green: #186d30;
+  --green-badge: #a2f6a9;
+  --green-badge-ink: #002108;
+
+  --surface-1: #f6f3f0;
+  --surface-2: #f0edea;
+  --surface-3: #eae8e4;
+  --line: #e5e2df;
+  --white: #ffffff;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(27, 28, 26, 0.08);
+
+  --container: 1280px;
+  --gutter: 48px;
+  --header-h: 80px;
+
+  --font: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
