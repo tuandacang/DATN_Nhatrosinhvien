@@ -9,6 +9,7 @@ import Appointments from './pages/Appointments.jsx'
 import Verify from './pages/Verify.jsx'
 import Notifications from './pages/Notifications.jsx'
 import Settings from './pages/Settings.jsx'
+import { Login, Register } from './pages/Auth.jsx'
 
 // Các trang chưa làm: thêm dần, mỗi trang xong thì thay bằng component thật
 const upcoming = [
@@ -18,8 +19,6 @@ const upcoming = [
   ['/tin-nhan', 'Tin nhắn'],
   ['/yeu-thich', 'Phòng đã lưu'],
   ['/ho-so', 'Hồ sơ cá nhân'],
-  ['/dang-nhap', 'Đăng nhập'],
-  ['/dang-ky', 'Đăng ký'],
 ]
 
 export default function App() {
@@ -33,6 +32,8 @@ export default function App() {
         <Route path="/chu-tro/lich-hen" element={<Appointments />} />
         <Route path="/chu-tro/xac-minh" element={<Verify />} />
         <Route path="/thong-bao" element={<Notifications />} />
+        <Route path="/dang-nhap" element={<Login />} />
+        <Route path="/dang-ky" element={<Register />} />
         <Route path="/cai-dat" element={<Settings />} />
         {upcoming.map(([path, title]) => (
           <Route key={path} path={path} element={<ComingSoon title={title} />} />
