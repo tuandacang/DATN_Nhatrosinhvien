@@ -73,8 +73,8 @@ export default function Profile() {
           <section id="info" className="card form">
             <h2>Thông tin sinh viên</h2>
             <div className="form__grid">
-              <Field label="Họ và tên"><input value={info.name} onChange={setI('name')} placeholder="Nguyễn Văn A" /></Field>
-              <Field label="Mã sinh viên"><input value={info.studentId} onChange={setI('studentId')} placeholder="20201234" /></Field>
+              <Field label="Họ và tên"><input value={info.name} onChange={setI('name')} placeholder="Vũ Tuấn Anh" /></Field>
+              <Field label="Mã sinh viên"><input value={info.studentId} onChange={setI('studentId')} placeholder="2121050396" /></Field>
               <Field label="Trường đại học">
                 <select value={info.school} onChange={setI('school')}>
                   {schools.map((s) => <option key={s}>{s}</option>)}

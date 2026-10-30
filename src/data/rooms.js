@@ -32,7 +32,7 @@ export const featuredRooms = [
 ]
 
 export const schools = [
-  'ĐH Bách Khoa Hà Nội',
+  'ĐH Mỏ Địa Chất',
   'ĐH Kinh Tế Quốc Dân',
   'ĐH Xây Dựng',
   'ĐHQG Hà Nội',
