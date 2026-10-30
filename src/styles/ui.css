@@ -522,3 +522,21 @@
     padding-top: 40px;
   }
 }
+
+.field textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  resize: vertical;
+}
+
+.field textarea:focus {
+  border-color: var(--red);
+  background: var(--white);
+}

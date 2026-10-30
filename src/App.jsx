@@ -8,6 +8,7 @@ import PostRoom from './pages/PostRoom.jsx'
 import Appointments from './pages/Appointments.jsx'
 import Verify from './pages/Verify.jsx'
 import Notifications from './pages/Notifications.jsx'
+import Profile from './pages/Profile.jsx'
 import Settings from './pages/Settings.jsx'
 import { Login, Register } from './pages/Auth.jsx'
 
@@ -18,7 +19,6 @@ const upcoming = [
   ['/o-ghep', 'Tìm bạn ở ghép'],
   ['/tin-nhan', 'Tin nhắn'],
   ['/yeu-thich', 'Phòng đã lưu'],
-  ['/ho-so', 'Hồ sơ cá nhân'],
 ]
 
 export default function App() {
@@ -34,6 +34,7 @@ export default function App() {
         <Route path="/thong-bao" element={<Notifications />} />
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ky" element={<Register />} />
+        <Route path="/ho-so" element={<Profile />} />
         <Route path="/cai-dat" element={<Settings />} />
         {upcoming.map(([path, title]) => (
           <Route key={path} path={path} element={<ComingSoon title={title} />} />
