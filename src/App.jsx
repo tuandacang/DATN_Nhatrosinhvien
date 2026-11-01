@@ -8,7 +8,9 @@ import PostRoom from './pages/PostRoom.jsx'
 import Appointments from './pages/Appointments.jsx'
 import Verify from './pages/Verify.jsx'
 import Notifications from './pages/Notifications.jsx'
+import Messages from './pages/Messages.jsx'
 import Profile from './pages/Profile.jsx'
+import Roommates from './pages/Roommates.jsx'
 import Settings from './pages/Settings.jsx'
 import { Login, Register } from './pages/Auth.jsx'
 
@@ -16,8 +18,6 @@ import { Login, Register } from './pages/Auth.jsx'
 const upcoming = [
   ['/tim-kiem', 'Tìm kiếm phòng'],
   ['/ban-do', 'Bản đồ lớn'],
-  ['/o-ghep', 'Tìm bạn ở ghép'],
-  ['/tin-nhan', 'Tin nhắn'],
   ['/yeu-thich', 'Phòng đã lưu'],
 ]
 
@@ -34,6 +34,8 @@ export default function App() {
         <Route path="/thong-bao" element={<Notifications />} />
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ky" element={<Register />} />
+        <Route path="/o-ghep" element={<Roommates />} />
+        <Route path="/tin-nhan" element={<Messages />} />
         <Route path="/ho-so" element={<Profile />} />
         <Route path="/cai-dat" element={<Settings />} />
         {upcoming.map(([path, title]) => (
