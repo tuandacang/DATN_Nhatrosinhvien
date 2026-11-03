@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
 import { HomeIcon } from './Icons.jsx'
 
 export default function RoomCard({ room }) {
   return (
+    <Link to={`/phong/${room.id}`} className="room-card-link">
     <article className="room-card">
       <div className="room-card__photo">
         {/* Thay bằng <img src={room.image} /> khi có ảnh thật */}
@@ -24,5 +26,6 @@ export default function RoomCard({ room }) {
         </div>
       </div>
     </article>
+    </Link>
   )
 }

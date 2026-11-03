@@ -56,7 +56,7 @@
 
 .rm__filter-row {
   display: grid;
-  grid-template-columns: 252px 1fr 1fr;
+  grid-template-columns: 252px 1fr 1fr 320px;
   gap: 24px;
 }
 

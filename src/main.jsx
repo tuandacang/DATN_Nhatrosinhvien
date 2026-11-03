@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { LoginPromptProvider } from './context/LoginPrompt.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <LoginPromptProvider>
+          <App />
+        </LoginPromptProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

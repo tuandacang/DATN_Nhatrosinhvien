@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
-import ComingSoon from './pages/ComingSoon.jsx'
+import RequireLogin from './components/RequireLogin.jsx'
 import Home from './pages/Home.jsx'
 import RoleSelect from './pages/RoleSelect.jsx'
 import Dashboard from './pages/Dashboard.jsx'
@@ -11,15 +11,16 @@ import Notifications from './pages/Notifications.jsx'
 import Messages from './pages/Messages.jsx'
 import Profile from './pages/Profile.jsx'
 import Roommates from './pages/Roommates.jsx'
+import SearchRooms from './pages/SearchRooms.jsx'
+import MapView from './pages/MapView.jsx'
+import RoomDetail from './pages/RoomDetail.jsx'
+import Booking from './pages/Booking.jsx'
+import Favorites from './pages/Favorites.jsx'
+import RoommateDetail from './pages/RoommateDetail.jsx'
+import PostRoommate from './pages/PostRoommate.jsx'
+import StudentVerify from './pages/StudentVerify.jsx'
 import Settings from './pages/Settings.jsx'
 import { Login, Register } from './pages/Auth.jsx'
-
-// Các trang chưa làm: thêm dần, mỗi trang xong thì thay bằng component thật
-const upcoming = [
-  ['/tim-kiem', 'Tìm kiếm phòng'],
-  ['/ban-do', 'Bản đồ lớn'],
-  ['/yeu-thich', 'Phòng đã lưu'],
-]
 
 export default function App() {
   return (
@@ -27,20 +28,25 @@ export default function App() {
       <Route path="/" element={<RoleSelect />} />
       <Route element={<Layout />}>
         <Route path="/trang-chu" element={<Home />} />
-        <Route path="/chu-tro" element={<Dashboard />} />
-        <Route path="/chu-tro/dang-tin" element={<PostRoom />} />
-        <Route path="/chu-tro/lich-hen" element={<Appointments />} />
-        <Route path="/chu-tro/xac-minh" element={<Verify />} />
-        <Route path="/thong-bao" element={<Notifications />} />
+        <Route path="/chu-tro" element={<RequireLogin><Dashboard /></RequireLogin>} />
+        <Route path="/chu-tro/dang-tin" element={<RequireLogin><PostRoom /></RequireLogin>} />
+        <Route path="/chu-tro/lich-hen" element={<RequireLogin><Appointments /></RequireLogin>} />
+        <Route path="/chu-tro/xac-minh" element={<RequireLogin><Verify /></RequireLogin>} />
+        <Route path="/thong-bao" element={<RequireLogin><Notifications /></RequireLogin>} />
         <Route path="/dang-nhap" element={<Login />} />
         <Route path="/dang-ky" element={<Register />} />
+        <Route path="/tim-kiem" element={<SearchRooms />} />
+        <Route path="/ban-do" element={<MapView />} />
+        <Route path="/phong/:id" element={<RoomDetail />} />
+        <Route path="/dat-lich/:id" element={<RequireLogin><Booking /></RequireLogin>} />
+        <Route path="/yeu-thich" element={<RequireLogin><Favorites /></RequireLogin>} />
         <Route path="/o-ghep" element={<Roommates />} />
-        <Route path="/tin-nhan" element={<Messages />} />
-        <Route path="/ho-so" element={<Profile />} />
+        <Route path="/o-ghep/dang-tin" element={<RequireLogin><PostRoommate /></RequireLogin>} />
+        <Route path="/o-ghep/:id" element={<RoommateDetail />} />
+        <Route path="/tin-nhan" element={<RequireLogin><Messages /></RequireLogin>} />
+        <Route path="/xac-minh-sinh-vien" element={<RequireLogin><StudentVerify /></RequireLogin>} />
+        <Route path="/ho-so" element={<RequireLogin><Profile /></RequireLogin>} />
         <Route path="/cai-dat" element={<Settings />} />
-        {upcoming.map(([path, title]) => (
-          <Route key={path} path={path} element={<ComingSoon title={title} />} />
-        ))}
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -76,7 +76,6 @@ export default function Messages() {
     <div className="page msg">
       <div className="msg__top">
         <div className="msg__top-left">
-          <span className="msg__top-icon">✉</span>
           <div>
             <h1>
               Tin nhắn trực tiếp
@@ -85,7 +84,7 @@ export default function Messages() {
             <p>Trao đổi an toàn, kiểm chứng phòng trọ &amp; tìm bạn ở ghép thời gian thực</p>
           </div>
         </div>
-        <span className="msg__trust">🔒 Hệ thống mã hoá bảo vệ sinh viên trước lừa đảo cọc ảo</span>
+        <span className="msg__trust">Hệ thống mã hoá bảo vệ sinh viên trước lừa đảo cọc ảo</span>
       </div>
 
       <div className="msg__box">
@@ -126,7 +125,7 @@ export default function Messages() {
             {shown.length === 0 && <p className="msg__none">Không có cuộc trò chuyện nào.</p>}
           </div>
 
-          <p className="msg__tip">🛡 Chỉ đặt cọc khi đã xem phòng trực tiếp và có biên lai rõ ràng.</p>
+          <p className="msg__tip">Chỉ đặt cọc khi đã xem phòng trực tiếp và có biên lai rõ ràng.</p>
         </aside>
 
         <section className="msg__chat">
@@ -142,13 +141,12 @@ export default function Messages() {
               <p>{active.online ? 'Đang trực tuyến · Phản hồi trong 5 phút' : 'Ngoại tuyến'}</p>
             </div>
             {active.phone && (
-              <a className="btn btn-outline" href={`tel:${active.phone}`}>📞 Gọi điện</a>
+              <a className="btn btn-outline" href={`tel:${active.phone}`}>Gọi điện</a>
             )}
           </header>
 
           {active.room && (
             <div className="msg__room">
-              <div className="msg__room-pic">🏠</div>
               <div className="msg__room-info">
                 <p><strong>{active.room.title}</strong><b>{active.room.price}</b></p>
                 <small>{active.room.meta}</small>
@@ -203,7 +201,7 @@ export default function Messages() {
               onChange={(e) => setDraft(e.target.value)}
               placeholder={`Nhập nội dung tin nhắn hoặc câu hỏi cho ${active.name}...`}
             />
-            <button type="submit" className="btn btn-primary">Gửi ➤</button>
+            <button type="submit" className="btn btn-primary">Gửi</button>
           </form>
         </section>
       </div>

@@ -1,10 +1,12 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import { isGated, useLoginPrompt } from '../context/LoginPrompt.jsx'
 import { menus } from '../data/menus.js'
 import { BellIcon } from './Icons.jsx'
 
 export default function Header() {
   const { role } = useAuth()
+  const { requireLogin } = useLoginPrompt()
   const current = role ?? 'guest'
   const links = menus[current]
   const loggedIn = current !== 'guest'
@@ -22,6 +24,12 @@ export default function Header() {
               key={item.to}
               to={item.to}
               end
+              onClick={(e) => {
+                if (current === 'guest' && isGated(item.to)) {
+                  e.preventDefault()
+                  requireLogin(`Đăng nhập để vào mục “${item.label}”.`)
+                }
+              }}
               className={({ isActive }) =>
                 'nav__link' + (isActive ? ' nav__link--active' : '')
               }

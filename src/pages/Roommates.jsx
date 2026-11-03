@@ -1,16 +1,28 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '../components/Avatar.jsx'
+import RoomGallery from '../components/RoomGallery.jsx'
+import { useLoginPrompt } from '../context/LoginPrompt.jsx'
+import { loadMyPosts } from '../data/myPosts.js'
+import { roommatePhotos } from '../data/roomImages.js'
 import { budgetOptions, lifestyleFilters, roommates, safetyTips } from '../data/social.js'
 
 const genders = ['Tất cả', 'Nữ', 'Nam']
-const schoolOptions = [...new Set(roommates.map((r) => r.school))]
+const roomStates = [
+  ['all', 'Tất cả'],
+  ['yes', 'Đã có phòng'],
+  ['no', 'Chưa có phòng'],
+]
 
 export default function Roommates() {
   const navigate = useNavigate()
+  const { requireLogin } = useLoginPrompt()
+  const everyone = [...loadMyPosts(), ...roommates]
+  const schoolOptions = [...new Set(everyone.map((r) => r.school))]
   const [gender, setGender] = useState('Tất cả')
   const [school, setSchool] = useState('')
   const [budget, setBudget] = useState('all')
+  const [hasRoom, setHasRoom] = useState('all')
   const [flags, setFlags] = useState([])
   const [saved, setSaved] = useState([])
 
@@ -20,15 +32,17 @@ export default function Roommates() {
     setGender('Tất cả')
     setSchool('')
     setBudget('all')
+    setHasRoom('all')
     setFlags([])
   }
 
   const test = budgetOptions.find((b) => b.key === budget).test
-  const list = roommates.filter(
+  const list = everyone.filter(
     (r) =>
       (gender === 'Tất cả' || r.gender === gender) &&
       (!school || r.school === school) &&
       test(r.budget) &&
+      (hasRoom === 'all' || r.hasRoom === (hasRoom === 'yes')) &&
       flags.every((f) => r.flags.includes(f)),
   )
 
@@ -41,7 +55,7 @@ export default function Roommates() {
             Kết nối bạn cùng phòng tin cậy, chung nhịp sống và tối ưu chi phí sinh hoạt ngay tại giảng đường.
           </p>
         </div>
-        <button type="button" className="btn btn-primary btn-lg">+ Đăng tin tìm bạn</button>
+        <button type="button" className="btn btn-primary btn-lg" onClick={() => !requireLogin('Đăng nhập để đăng tin tìm bạn ở ghép.') && navigate('/o-ghep/dang-tin')}>+ Đăng tin tìm bạn</button>
       </div>
 
       <section className="rm__filters">
@@ -69,6 +83,16 @@ export default function Roommates() {
               {budgetOptions.map((b) => <option key={b.key} value={b.key}>{b.label}</option>)}
             </select>
           </label>
+          <div className="rm__ctl">
+            <span className="rm__ctl-label">TÌNH TRẠNG PHÒNG</span>
+            <div className="rm__seg">
+              {roomStates.map(([k, label]) => (
+                <button key={k} type="button" className={hasRoom === k ? 'on' : ''} onClick={() => setHasRoom(k)}>
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="rm__chips">
@@ -105,22 +129,24 @@ export default function Roommates() {
                 <Avatar name={r.name} size={56} online />
                 <div className="rm-card__who">
                   <h3>{r.name}</h3>
-                  <p>{r.gender} • Năm {r.year} {r.school}</p>
+                  <p>{r.gender} • {r.year ? `Năm ${r.year} ` : ''}{r.school}</p>
                 </div>
                 <button
                   type="button"
                   className={'rm-card__save' + (saved.includes(r.id) ? ' on' : '')}
                   aria-label="Lưu"
-                  onClick={() => toggleSave(r.id)}
+                  onClick={() => !requireLogin('Đăng nhập để lưu bạn ở ghép vào mục Yêu thích.') && toggleSave(r.id)}
                 >
                   {saved.includes(r.id) ? '♥' : '♡'}
                 </button>
               </div>
 
               <div className="rm-card__badges">
-                <span className="tag tag--ok">✓ {r.badge}</span>
+                <span className="tag tag--ok">{r.badge}</span>
                 {r.hasRoom ? <span className="tag rm-card__room">Đã có sẵn phòng</span> : <span className="tag tag--muted">{r.area}</span>}
               </div>
+
+              {r.hasRoom && <RoomGallery photos={roommatePhotos(r)} />}
 
               <div className="rm-card__budget">
                 <small>{r.hasRoom ? 'Ngân sách share phòng:' : 'Ngân sách mong muốn:'}</small>
@@ -137,10 +163,14 @@ export default function Roommates() {
               <p className="rm-card__bio">“{r.bio}”</p>
 
               <div className="rm-card__actions">
-                <button type="button" className="btn btn-outline">Xem chi tiết</button>
-                <button type="button" className="btn btn-primary" onClick={() => navigate(`/tin-nhan?with=${r.id}`)}>
-                  Nhắn tin
-                </button>
+                <button type="button" className="btn btn-outline" onClick={() => navigate(`/o-ghep/${r.id}`)}>Xem chi tiết</button>
+                {r.mine ? (
+                  <button type="button" className="btn btn-primary" disabled>Tin của bạn</button>
+                ) : (
+                  <button type="button" className="btn btn-primary" onClick={() => !requireLogin('Đăng nhập để nhắn tin với bạn ở ghép.') && navigate(`/tin-nhan?with=${r.id}`)}>
+                    Nhắn tin
+                  </button>
+                )}
               </div>
             </article>
           ))}
