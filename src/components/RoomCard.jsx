@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
-import { HomeIcon } from './Icons.jsx'
+import { roomBg } from '../data/roomPhotos.js'
 
 export default function RoomCard({ room }) {
   return (
     <Link to={`/phong/${room.id}`} className="room-card-link">
     <article className="room-card">
-      <div className="room-card__photo">
-        {/* Thay bằng <img src={room.image} /> khi có ảnh thật */}
-        <HomeIcon width={40} height={40} />
+      <div className="room-card__photo" style={roomBg(room.id)}>
         {room.available && <span className="badge">Còn phòng</span>}
       </div>
 

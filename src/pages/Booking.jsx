@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { roomBg } from '../data/roomPhotos.js'
 import { Link, useParams } from 'react-router-dom'
 import { Field } from '../components/ui.jsx'
 import { getListing } from '../data/listings.js'
@@ -96,7 +97,7 @@ export default function Booking() {
         </form>
 
         <aside className="card bk__room">
-          <div className={'bk__pic lc__photo--' + (room.id % 4)} />
+          <div className={'bk__pic lc__photo--' + (room.id % 4)} style={roomBg(room.id)} />
           <h3>{room.title}</h3>
           <p>{room.address}</p>
           <p><strong>{room.price} triệu/tháng</strong> · {room.area}m²</p>

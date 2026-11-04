@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { roomBg } from '../data/roomPhotos.js'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Link } from 'react-router-dom'
@@ -212,7 +213,7 @@ export default function MapView() {
       {active && (
         <aside className="mapfull__card">
           <button type="button" className="mapfull__close" aria-label="Đóng" onClick={() => setActiveId(null)}>×</button>
-          <div className={'mapfull__pic lc__photo--' + (active.id % 4)}>
+          <div className={'mapfull__pic lc__photo--' + (active.id % 4)} style={roomBg(active.id)}>
             <span className="badge">Còn phòng</span>
           </div>
           <div className="mapfull__body">

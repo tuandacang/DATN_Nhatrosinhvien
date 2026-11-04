@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { roomBg } from '../data/roomPhotos.js'
 import { useLoginPrompt } from '../context/LoginPrompt.jsx'
 import useFavorites from '../hooks/useFavorites.js'
 
@@ -14,7 +15,7 @@ export default function ListingCard({ room, active, onHover }) {
       className={'lc' + (active ? ' lc--on' : '')}
       onMouseEnter={() => onHover?.(room.id)}
     >
-      <Link to={`/phong/${room.id}`} className={'lc__photo lc__photo--' + (room.id % 4)}>
+      <Link to={`/phong/${room.id}`} className={'lc__photo lc__photo--' + (room.id % 4)} style={roomBg(room.id)}>
         {room.available && <span className="badge">Còn phòng</span>}
         <span className="lc__type">{typeName[room.type]}</span>
       </Link>

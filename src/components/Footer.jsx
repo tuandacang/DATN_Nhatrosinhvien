@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="footer__cols">
           <div className="footer__brand">
             <Link to="/trang-chu" className="footer__logo">
-              TroGanTruong
+              TroGanTruong<span className="logo-vn">.vn</span>
             </Link>
             <p>
               Hệ thống kết nối phòng trọ, căn hộ mini uy tín, an toàn và minh

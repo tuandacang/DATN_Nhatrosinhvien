@@ -68,7 +68,7 @@ export default function Home() {
           </div>
           <p className="featured__desc">
             Khảo sát trực tiếp, không phụ phí ẩn, môi trường yên tĩnh học tập
-            quanh khu vực Bách - Kinh - Xây.
+            khu vực trường đại học.
           </p>
         </div>
 

@@ -38,7 +38,7 @@ export default function RoleSelect() {
   return (
     <div className="role">
       <div className="role__inner">
-        <p className="role__logo">TroGanTruong.vn</p>
+        <p className="role__logo">TroGanTruong<span className="logo-vn">.vn</span></p>
         <p className="eyebrow role__eyebrow">Cộng đồng sinh viên Thủ đô</p>
         <h1 className="role__title">Bạn muốn làm gì hôm nay?</h1>
         <p className="role__sub">

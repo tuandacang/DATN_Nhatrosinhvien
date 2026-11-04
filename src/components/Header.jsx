@@ -15,7 +15,7 @@ export default function Header() {
     <header className="header">
       <div className="header__inner">
         <Link to="/trang-chu" className="header__logo">
-          TroGanTruong.vn
+          TroGanTruong<span className="logo-vn">.vn</span>
         </Link>
 
         <nav className="nav" aria-label="Điều hướng chính">

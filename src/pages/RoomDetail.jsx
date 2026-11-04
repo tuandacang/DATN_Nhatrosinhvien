@@ -1,4 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { roomBg } from '../data/roomPhotos.js'
 import Avatar from '../components/Avatar.jsx'
 import ListingCard from '../components/ListingCard.jsx'
 import { useLoginPrompt } from '../context/LoginPrompt.jsx'
@@ -36,7 +37,7 @@ export default function RoomDetail() {
 
       <div className="rd__gallery">
         {[0, 1, 2, 3, 4].map((i) => (
-          <div key={i} className={'rd__img lc__photo--' + ((room.id + i) % 4)}>{i === 4 && <span>+ 12 ảnh</span>}</div>
+          <div key={i} className={'rd__img lc__photo--' + ((room.id + i) % 4)} style={roomBg(room.id, i, i === 0 ? 1000 : 600)}>{i === 4 && <span>+ 12 ảnh</span>}</div>
         ))}
       </div>
 

@@ -24,10 +24,11 @@ function ToggleRow({ title, desc, value, onChange }) {
 
 export default function Settings() {
   const { role } = useAuth()
-  const [profile, setProfile] = useState({ name: 'Nguyễn Văn A', house: 'Nhà trọ Xuân Thủy', email: '', phone: '' })
+  const isStudent = role !== 'landlord'
+  const [profile, setProfile] = useState({ name: 'Nguyễn Văn A', school: '', house: 'Nhà trọ Xuân Thủy', email: '', phone: '' })
   const [pw, setPw] = useState({ current: '', next: '', again: '' })
-  const [notify, setNotify] = useState([true, true, true])
-  const [privacy, setPrivacy] = useState([true, true])
+  const [notify, setNotify] = useState(isStudent ? [true, true, false] : [true, true, true])
+  const [privacy, setPrivacy] = useState(isStudent ? [false, true] : [true, true])
   const [msg, setMsg] = useState('')
   const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -62,12 +63,14 @@ export default function Settings() {
           <section id="info" className="card form">
             <h2>Thông tin cá nhân</h2>
             <div className="avatar-row">
-              <span className="avatar">{role === 'landlord' ? 'C' : 'S'}</span>
+              <span className="avatar">{isStudent ? 'S' : 'C'}</span>
               <button type="button" className="btn btn-outline">Đổi ảnh</button>
             </div>
             <div className="form__grid">
               <Field label="Họ và tên"><input value={profile.name} onChange={setP('name')} /></Field>
-              {role === 'landlord' && (
+              {isStudent ? (
+                <Field label="Trường đại học"><input value={profile.school} onChange={setP('school')} placeholder="ĐH Quốc Gia Hà Nội" /></Field>
+              ) : (
                 <Field label="Tên nhà trọ"><input value={profile.house} onChange={setP('house')} /></Field>
               )}
               <Field label="Email"><input type="email" value={profile.email} onChange={setP('email')} placeholder="email@example.com" /></Field>
@@ -100,12 +103,16 @@ export default function Settings() {
             <h2>Thông báo</h2>
             <ToggleRow title="Thông báo qua email" desc="Nhận email khi có tin nhắn hoặc lịch xem phòng mới." value={notify[0]} onChange={flip(setNotify)(0)} />
             <ToggleRow title="Thông báo đẩy trên trình duyệt" desc="Hiển thị thông báo ngay cả khi bạn không mở trang." value={notify[1]} onChange={flip(setNotify)(1)} />
-            <ToggleRow title="Yêu cầu liên hệ mới" desc="Nhận thông báo khi sinh viên gửi yêu cầu liên hệ hoặc đặt lịch." value={notify[2]} onChange={flip(setNotify)(2)} />
+            {isStudent ? (
+              <ToggleRow title="Phòng mới phù hợp tìm kiếm" desc="Gợi ý phòng gần trường và đúng khoảng giá của bạn." value={notify[2]} onChange={flip(setNotify)(2)} />
+            ) : (
+              <ToggleRow title="Yêu cầu liên hệ mới" desc="Nhận thông báo khi sinh viên gửi yêu cầu liên hệ hoặc đặt lịch." value={notify[2]} onChange={flip(setNotify)(2)} />
+            )}
           </section>
 
           <section id="privacy" className="card form">
             <h2>Quyền riêng tư</h2>
-            <ToggleRow title="Hiển thị số điện thoại trên hồ sơ" desc="Chỉ sinh viên đã đặt lịch hẹn mới thấy số của bạn." value={privacy[0]} onChange={flip(setPrivacy)(0)} />
+            <ToggleRow title="Hiển thị số điện thoại trên hồ sơ" desc={isStudent ? 'Chỉ chủ trọ đã được xác nhận lịch hẹn mới thấy số của bạn.' : 'Chỉ sinh viên đã đặt lịch hẹn mới thấy số của bạn.'} value={privacy[0]} onChange={flip(setPrivacy)(0)} />
             <ToggleRow title="Cho phép người khác nhắn tin" desc="Sinh viên và chủ trọ có thể gửi tin nhắn cho bạn." value={privacy[1]} onChange={flip(setPrivacy)(1)} />
           </section>
 
